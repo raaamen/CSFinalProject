@@ -1,0 +1,8 @@
+$TestPlayer
+Hello! My name is TestPlayer
+$TestPlayer2
+And I am TestPlayer2!
+testing multiple sentences
+$TestPlayer3
+I am TestPlayer3
+and this is a test of using $in sentences
