@@ -3,3 +3,5 @@ Assets/Japanese_Street_(Mobile)/URP_Japanese_Street_(Mobile).unitypackage.meta f
 *.zip filter=lfs diff=lfs merge=lfs -text
 *.png filter=lfs diff=lfs merge=lfs -text
 *.unity filter=lfs diff=lfs merge=lfs -text
+*.bundle filter=lfs diff=lfs merge=lfs -text
+*.dylib filter=lfs diff=lfs merge=lfs -text
