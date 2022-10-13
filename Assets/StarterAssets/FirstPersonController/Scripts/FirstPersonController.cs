@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
+using Cinemachine;
+using System;
+using System.Collections.Generic;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -19,6 +22,12 @@ namespace StarterAssets
 		[Tooltip("Rotation speed of the character")]
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
+
+		public float ZoomSpeed = 10.0f;
+		[Tooltip("Speed that the camera can zoom")]
+
+		public float CameraMoveSpeed = 10.0f;
+		[Tooltip("Speed that the camera can move")]
 		public float SpeedChangeRate = 10.0f;
 
 		[Space(10)]
@@ -51,8 +60,33 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
+		[Header("Camera Positions")]
+		public List<Transform> cameraList;
+
+		public GameObject parentObj;
+
+		public int cameraListInt{
+			get {
+				return _cameraListInt;
+			}
+			set {
+				Debug.Log("cam list count "+cameraList.Count);
+				_cameraListInt+=value;
+				if (_cameraListInt > cameraList.Count)
+				{
+					Debug.Log("Reverting to 0");
+
+					_cameraListInt = 0;
+				}
+			}
+		}
+		private int _cameraListInt;
+
+		private bool cameraPosChanged;
+
 		// cinemachine
 		private float _cinemachineTargetPitch;
+		public CinemachineVirtualCamera cinemachineVirtualCamera;
 
 		// player
 		private float _speed;
@@ -93,6 +127,10 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+			if (cinemachineVirtualCamera == null)
+			{
+				cinemachineVirtualCamera = CinemachineCameraTarget.GetComponent<CinemachineVirtualCamera>();
+			}
 		}
 
 		private void Start()
@@ -112,14 +150,17 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			JumpAndGravity();
-			GroundedCheck();
+			//JumpAndGravity();
+			//GroundedCheck();
 			Move();
+			Zoom();
+			CameraPosSwitch(_input.camswitch);
 		}
 
 		private void LateUpdate()
 		{
 			CameraRotation();
+			CameraLook();
 		}
 
 		private void GroundedCheck()
@@ -127,6 +168,21 @@ namespace StarterAssets
 			// set sphere position, with offset
 			Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+		}
+
+		private void CameraPosSwitch(bool pressed){
+			
+			Debug.Log(cameraPosChanged);
+			if (cameraPosChanged)
+			{
+				Debug.Log("Camera List Int "+cameraListInt);
+				parentObj.transform.position = cameraList[cameraListInt].position;
+				cameraListInt++;
+				Debug.Log("Camera List Int "+cameraListInt);
+				Debug.Log("Parent location "+parentObj.transform.position);
+				Debug.Log(cameraList[cameraListInt].name+ " " + cameraList[cameraListInt++].position);
+				cameraPosChanged=false;
+			}
 		}
 
 		private void CameraRotation()
@@ -196,6 +252,31 @@ namespace StarterAssets
 
 			// move the player
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+		}
+
+		private void CameraLook(){
+
+			float movespeed = MoveSpeed;
+			if (_input.cameramove == Vector2.zero) movespeed = 0.0f;
+			Quaternion currentCameraSpeed = CinemachineCameraTarget.transform.localRotation;
+
+			Vector3 newVect = new Vector3(-_input.cameramove.y, _input.cameramove.x, 0);
+
+			transform.localEulerAngles += newVect * movespeed * Time.deltaTime;
+
+		}
+
+		private void Zoom(){
+			//gets current zoomspeed
+			float zoomspeed = ZoomSpeed;
+			if (_input.zoom == 0) zoomspeed=0;
+			//gets current zoom length from virtual camera's field of view
+			float currentZoomLength = cinemachineVirtualCamera.m_Lens.FieldOfView;
+
+			float targetZoomLength = currentZoomLength + (zoomspeed * _input.zoom * Time.deltaTime);
+			cinemachineVirtualCamera.m_Lens.FieldOfView=targetZoomLength;
+			
+
 		}
 
 		private void JumpAndGravity()

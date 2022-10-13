@@ -1,0 +1,17 @@
+$You
+Police, non-emergency line.
+$Caller
+Um, hi. I’ve been hearing weird things outside. Do you think you could send somebody over to check?
+$You
+What kind of “weird things”? Can you elaborate?
+$Caller
+I don’t know, to be honest. There’s some scratching? And some whispers, or moans?
+I tried convincing myself it was an animal, but it’s just… weirdly human.
+I’m scared to check outside, especially this late at night.
+$You
+Alright, ma’am. Where are you located? I can check on the CCTV cameras for you, if you’re close enough.
+$Caller
+I’m on Maple Street, towards the end of the street. My apartment is next to a small park.
+$You
+Yeah, I know where that is. Let me take a look.
+Alright, she said near the park. I think that’s… this way.

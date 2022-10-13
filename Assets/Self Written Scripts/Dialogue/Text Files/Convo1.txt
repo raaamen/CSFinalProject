@@ -1,0 +1,35 @@
+$  
+The phone is ringing.
+You should pick it up.
+*Click*
+$Police Captain
+Officer Jackson come in. How are things at the station?
+$You
+Calm for now, sir. I haven’t seen anything concerning on the cameras.
+$Police Captain
+You remember how to operate them, right Jackson?
+$You
+Er… it’s been a while sir. I could use a refresher.
+$Police Captain
+Alright Jackson. Pay close attention.
+If you’re using a keyboard, use WASD to move the camera around.
+Use Q and E to zoom in and out.
+If you’re using a gamepad, use the right joystick to move the camera around.
+Use the left joystick to zoom in and out.
+Easy enough for you?
+$You
+Yep, I got it. Thank you, sir.
+$Police Captain
+Stay safe tonight, Jackson. I don’t believe in any of that paranormal stuff, but things have definitely been weird around here.
+Keep your wits, and be careful. If you see or hear anything strange, investigate carefully, at your own risk.
+We can’t afford to do any replacing right now, haha!
+Alright, have a good night Jackson. If you call, I’ll try and answer.
+$You
+Thank you, sir. I’ll try my best. Good night.
+$  
+*Click*
+You’re now alone.
+Time to get to work.
+Use the cameras like the captain said. Keep an eye on things. Our shift ends in the morning.
+…
+I really hope tonight is peaceful.
