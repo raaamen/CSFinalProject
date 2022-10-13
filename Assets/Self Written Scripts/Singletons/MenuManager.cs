@@ -4,7 +4,7 @@ using UnityEngine;
 using Pixelplacement;
 using UnityEngine.UI;
 
-public class MenuManager : MonoBehaviour
+public class MenuManager : Singleton<MenuManager>
 {
     public DisplayObject defaultButtons;
     public DisplayObject audioSettings;

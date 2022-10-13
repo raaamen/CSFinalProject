@@ -236,10 +236,10 @@ public class OVRPlayerController : MonoBehaviour
 #if ENABLE_LEGACY_INPUT_MANAGER
 
 		//Use keys to ratchet rotation
-		if (Input.GetKeyDown(KeyCode.Q))
+		if (Input.GetKeyDown(KeyCode.LeftArrow))
 			buttonRotation -= RotationRatchet;
 
-		if (Input.GetKeyDown(KeyCode.E))
+		if (Input.GetKeyDown(KeyCode.RightArrow))
 			buttonRotation += RotationRatchet;
 #endif
 	}
