@@ -41,8 +41,6 @@ public class GameManager : Singleton<GameManager>
         //this stuff doesnt run because the gamemanager unloads and then reloads
         yield return null;
     }
-    
-
     public IEnumerator SetupBeginningOfGame(){
         gameLoading=true;
         Debug.Log("Loading done");

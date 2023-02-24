@@ -6,14 +6,13 @@ using System.Linq;
 using TMPro;
 using Pixelplacement;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class DialogueManager : Singleton<DialogueManager>
 {
 
-    //before you roast me, i know everything is public
-    //i wanted to test everything in inspector before making things private
-    //also this is a singleton so some things need access
-    //fully aware that this is bad i just dont have time to fix it
+    public List<Conversation> storyBeat1Dialogue;
+
     public Queue<string> sentences;
     public GameObject textUIElements;
     public TextMeshProUGUI textBox;
@@ -131,7 +130,6 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             return null;
         }
-        
         return null;
     }
 
@@ -152,6 +150,10 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             Debug.Log(item);
         }
+    }
+
+    public void InitDialogue(Conversation convo){
+        //todo
     }
 }
 
