@@ -11,6 +11,15 @@ using UnityEngine.Events;
 public class DialogueManager : Singleton<DialogueManager>
 {
 
+    //references for gamemanager
+    public DisplayObject DialogueMenu = GameObject.Find("DialoguePanel").GetComponent<DisplayObject>();
+    public DisplayObject OnScreenText = GameObject.Find("ScreenText").GetComponent<DisplayObject>();
+    
+
+
+
+    public UnityAction dialogueEnd;
+
     public List<Conversation> storyBeat1Dialogue;
 
     public Queue<string> sentences;
@@ -35,6 +44,8 @@ public class DialogueManager : Singleton<DialogueManager>
       //  charVoices.Add(kvp.key, kvp.val);
      // }
       //PrintDictionary(charVoices);
+
+      
     }
     //take in textasset from scriptableobject and turn it into queue
     public void StartDialogue(Conversation convoObj){
@@ -50,7 +61,7 @@ public class DialogueManager : Singleton<DialogueManager>
     }
     public void AdvanceDialogue(){
         sentences.Dequeue();
-        if (sentences.Count==0)
+        if (sentences.Count == 0)
         {
             EndDialogue();
         }
@@ -59,7 +70,7 @@ public class DialogueManager : Singleton<DialogueManager>
     public void WriteDialogue(){
         
         string currentSentence = sentences.Peek();
-        if (currentSentence =="")
+        if (string.IsNullOrEmpty(currentSentence) || string.IsNullOrWhiteSpace(currentSentence))
         {
             EndDialogue();
             return;
@@ -73,15 +84,17 @@ public class DialogueManager : Singleton<DialogueManager>
             //audioSource.clip = charVoices[nameBox.text];
             sentences.Dequeue();
         }
-        
-        
         StartCoroutine(PrintOneByOne(sentences.Peek()));
     }
     public void EndDialogue(){
         //clear queue
+        sentences.Clear();
+        dialogueOccuring=false;
         Debug.Log("dialogue ended");
         textUIElements.SetActive(false);
-        sentences.Clear();
+        //trigger event if there is one to be triggered
+
+
     }
     public void ReadTextFile(TextAsset asset){
         //read in from conversation
@@ -95,17 +108,7 @@ public class DialogueManager : Singleton<DialogueManager>
         PrintQueue(sentences);
         Debug.Log(sentences.ToString());
     }
-    private void OnMouseDown() {
-        Debug.Log("mouse clicked");
-        if (dialogueOccuring)
-        {
-            StopAllCoroutines();
-            textBox.text = sentences.Peek();
-        }
-        else {
-            AdvanceDialogue();
-        }
-    }
+
     public IEnumerator PrintOneByOne(string currentSentence){
         dialogueOccuring=true;
         Debug.Log("printing");
@@ -114,15 +117,29 @@ public class DialogueManager : Singleton<DialogueManager>
         for (int i = 0; i < currentSentence.Length; i++)
         {
             tempsentence+=currentSentence[i].ToString();
-            Debug.Log(tempsentence);
+            //Debug.Log(tempsentence);
             textBox.text = tempsentence;
             //audioSource.Play();
             yield return new WaitForSeconds(textOffset);
         }
+        currentSentence="";
+        tempsentence = "";
         dialogueOccuring=false;
         yield return new WaitForSeconds(1);
         AdvanceDialogue();
         yield return null;
+    }
+
+    private void FixedUpdate() {
+        if (Input.GetMouseButtonDown(0) && dialogueOccuring)
+        {
+            dialogueOccuring=false;
+            StopAllCoroutines();
+            textBox.text = sentences.Peek();
+            AdvanceDialogue();
+            
+        }
+        else return;
     }
 
     public string ConvoNameOccuring(){
@@ -130,8 +147,11 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             return null;
         }
+        //todo
         return null;
     }
+
+    
 
     public bool DialogueOccuring(){
         return dialogueOccuring;

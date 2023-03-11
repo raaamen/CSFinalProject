@@ -172,7 +172,7 @@ namespace StarterAssets
 
 		private void CameraPosSwitch(bool pressed){
 			
-			Debug.Log(cameraPosChanged);
+			//Debug.Log(cameraPosChanged);
 			if (cameraPosChanged)
 			{
 				Debug.Log("Camera List Int "+cameraListInt);

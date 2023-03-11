@@ -23,7 +23,7 @@ public class GameManager : Singleton<GameManager>
         audioSrc = GetComponent<AudioSource>();
     }
     private void Update() {
-        Debug.Log("test");
+        Debug.Log("testing destroyonload");
     }
     public void OnPause(){
         Time.timeScale = 0;
@@ -35,27 +35,33 @@ public class GameManager : Singleton<GameManager>
     public IEnumerator StartGame(){
         Debug.Log("Loading main game scene");
         AsyncOperation loadingOperation = SceneManager.LoadSceneAsync("GameScene");
-        Debug.Log("loading status: "+loadingOperation.isDone);
-        gameStart=true;
         LoadingScreen.Solo();
-        //this stuff doesnt run because the gamemanager unloads and then reloads
-        yield return null;
+        while (!loadingOperation.isDone)
+        {
+            Debug.Log("loading");
+            yield return null;
+        }
+        
     }
-    public IEnumerator SetupBeginningOfGame(){
+    public void SetupBeginningOfGame(){
         gameLoading=true;
         Debug.Log("Loading done");
         Debug.Log("Game started");
         EventManager.Instance.gameStarted = true;
-        StartCoroutine("SetupBeginningOfGame");
-        DialogueMenu = GameObject.Find("DialoguePanel").GetComponent<DisplayObject>();
-        OnScreenText = GameObject.Find("ScreenText").GetComponent<DisplayObject>();
+        DialogueMenu = DialogueManager.Instance.DialogueMenu;
+        OnScreenText = DialogueManager.Instance.OnScreenText;
         Debug.Log("Setting up beginning of game");
-        ovrCamera = GameObject.Find("OVRCameraRig");
-        yield return new WaitForSeconds(gameStartBuffer);
+        //ovrCamera = GameObject.Find("OVRCameraRig");
+        Debug.Log("game set");
         EventManager.Instance.DialogueStart(0);
+        EventManager.TriggerEvent("First Phone Call");
         gameLoading=false;
-        yield return null;
+
     }
+
+
+
+    
 
     
 }

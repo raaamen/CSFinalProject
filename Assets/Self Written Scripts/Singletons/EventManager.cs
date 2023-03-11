@@ -38,6 +38,7 @@ public class EventManager : Singleton<EventManager>
         {
             eventsDictionary = new Dictionary<string, UnityEvent>();   
         }
+        
     }
 
     private void Awake() {
@@ -45,7 +46,9 @@ public class EventManager : Singleton<EventManager>
         audioSrc = GetComponent<AudioSource>();
     }
 
-
+    private void Start() {
+        GameManager.Instance.SetupBeginningOfGame();
+    }
     //allows unityevent to trigger a unityaction
     public static void StartListening(string eventName, UnityAction listener){
         UnityEvent thisEvent = null;
@@ -77,16 +80,10 @@ public class EventManager : Singleton<EventManager>
         if (Instance.eventsDictionary.TryGetValue(eventName, out thisEvent))
         {
             thisEvent.Invoke();
+            Debug.Log("Event triggered:" +thisEvent);
         }
     }
 
-    private void Start() {
-        if (GameManager.Instance.gameStart)
-        {
-            gameStarted=GameManager.Instance.gameStart;
-            DialogueStart(0);
-        }
-    }
 
     //THIS ALSO SHOULD NOT FUNCTION. IF IT DOES, I DONT KNOW HOW OR WHY
     private void UpdateStory(int currentIndex){
@@ -109,6 +106,9 @@ public class EventManager : Singleton<EventManager>
     public void PlayScarySound(int index, float volume){
         audioSrc.PlayOneShot(scaryAudioClips[index], volume);
     }
+    public void PlayScarySound(AudioClip clip, float volume){
+        audioSrc.PlayOneShot(clip, volume);
+    }
 
     
 
@@ -123,6 +123,8 @@ public class EventManager : Singleton<EventManager>
     void StoryBeat2(){
 
     }
+    
+
     
 
 }

@@ -9,7 +9,7 @@ public class MysteryManBehavior : MonoBehaviour
     private UnityAction wasSeen;
 
     private void Awake() {
-        wasSeen = new UnityAction(WasSeen);
+        
     }
     
 

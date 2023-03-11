@@ -16,6 +16,7 @@ public class CameraView : MonoBehaviour
         manSeen+=Dialogue;
 
         EventManager.StartListening("ManSeen", manSeen);
+        //StartCoroutine(SeekObject("MysteryMan"));
         
     }
 
@@ -30,24 +31,24 @@ public class CameraView : MonoBehaviour
     }
 
     public IEnumerator SeekObject(string objectname){
+        Debug.Log("coroutine started");
         var obj = GameObject.Find(objectname);
         bool objectFound = false;
         while (objectFound == false)
         {
+            Debug.Log("seeking");
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, cameraRenderLayerMask))
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
                 Debug.Log("Hit "+hit.collider.gameObject.name);
-                if (hit.collider.gameObject.name == "dude")
+                if (hit.collider.gameObject.name == "MysteryMan")
                 {
-                    EventManager.TriggerEvent("ManSeen");
+                    Debug.Log("man was seen");
+                    //EventManager.TriggerEvent("ManSeen");
                 }
             }
             else Debug.Log("Didn't hit");
-        
-                
-        
         }
 
         yield return null;
