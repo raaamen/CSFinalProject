@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Pixelplacement;
-
+using UnityEngine.XR;
 public class GameManager : Singleton<GameManager>
 {
     public DisplayObject PauseMenu;   
@@ -15,6 +15,11 @@ public class GameManager : Singleton<GameManager>
     public bool gameLoading;
     public bool gameStart;
     public GameObject ovrCamera;
+    public GameObject firstPersonCamera;
+
+    public XRControlManager xrManager;
+
+    public bool gameIsInVR;
 
     [Header("Camera Warp Positions")]
     public Transform apartmentLivingRoom;
@@ -23,11 +28,10 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+        xrManager = GetComponent<XRControlManager>();
         audioSrc = GetComponent<AudioSource>();
     }
-    private void Update() {
-        Debug.Log("testing destroyonload");
-    }
+    
     public void OnPause(){
         Time.timeScale = 0;
         PauseMenu.SetActive(true);
@@ -46,8 +50,12 @@ public class GameManager : Singleton<GameManager>
         }
         
     }
+
+    
+
     public void SetupBeginningOfGame(){
         gameLoading=true;
+        xrManager.MainGameInitVR();
         Debug.Log("Loading done");
         Debug.Log("Game started");
         EventManager.Instance.gameStarted = true;
@@ -55,15 +63,14 @@ public class GameManager : Singleton<GameManager>
         OnScreenText = DialogueManager.Instance.OnScreenText;
         Debug.Log("Setting up beginning of game");
         ovrCamera = GameObject.Find("OVRPlayerController");
+        firstPersonCamera = GameObject.Find("FirstPersonPlayerController");
         Debug.Log("game set");
         EventManager.Instance.DialogueStart(0);
         gameLoading=false;
 
     }
 
-    public void ChangeCameraPosition(Transform newPos){
-        ovrCamera.transform.position = newPos.position;
-    }
+    
 
     
 

@@ -258,6 +258,7 @@ namespace StarterAssets
 
 			float movespeed = MoveSpeed;
 			if (_input.cameramove == Vector2.zero) movespeed = 0.0f;
+			//FIX!!!!!!!!!!!!!!
 			Quaternion currentCameraSpeed = CinemachineCameraTarget.transform.localRotation;
 
 			Vector3 newVect = new Vector3(-_input.cameramove.y, _input.cameramove.x, 0);
@@ -271,6 +272,7 @@ namespace StarterAssets
 			float zoomspeed = ZoomSpeed;
 			if (_input.zoom == 0) zoomspeed=0;
 			//gets current zoom length from virtual camera's field of view
+			//FIX!!!!!!!!
 			float currentZoomLength = cinemachineVirtualCamera.m_Lens.FieldOfView;
 
 			float targetZoomLength = currentZoomLength + (zoomspeed * _input.zoom * Time.deltaTime);

@@ -19,7 +19,7 @@ public class EventManager : Singleton<EventManager>
     //bool seekingMysteryMan;
     public List<AudioClip> scaryAudioClips;
 
-    public GameObject ovrCamera;
+    public GameObject gameCamera;
     
     //create methods that will allow new events and create new entries into dictionary
     public Dictionary<string, UnityEvent> eventsDictionary;
@@ -40,7 +40,15 @@ public class EventManager : Singleton<EventManager>
         {
             eventsDictionary = new Dictionary<string, UnityEvent>();   
         }
-        
+        switch (GameManager.Instance.gameIsInVR)
+        {
+            case true:
+                gameCamera = GameObject.Find("");
+                break;
+            case false:
+                gameCamera = GameObject.Find("");
+                break;
+        }
     }
 
     private void Awake() {
@@ -115,7 +123,7 @@ public class EventManager : Singleton<EventManager>
     }
 
     public void ChangeCameraPosition(Transform newPos){
-        ovrCamera.transform.position = newPos.position;
+        gameCamera.transform.position = newPos.position;
     }
 
 }
