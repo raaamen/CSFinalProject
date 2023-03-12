@@ -15,6 +15,9 @@ public class GameManager : Singleton<GameManager>
     public bool gameLoading;
     public bool gameStart;
     public GameObject ovrCamera;
+
+    [Header("Camera Warp Positions")]
+    public Transform apartmentLivingRoom;
     
     // Start is called before the first frame update
     void Start()
@@ -51,15 +54,15 @@ public class GameManager : Singleton<GameManager>
         DialogueMenu = DialogueManager.Instance.DialogueMenu;
         OnScreenText = DialogueManager.Instance.OnScreenText;
         Debug.Log("Setting up beginning of game");
-        //ovrCamera = GameObject.Find("OVRCameraRig");
+        ovrCamera = GameObject.Find("OVRPlayerController");
         Debug.Log("game set");
         EventManager.Instance.DialogueStart(0);
         gameLoading=false;
 
     }
 
-    void ChangeCameraPosition(){
-        
+    public void ChangeCameraPosition(Transform newPos){
+        ovrCamera.transform.position = newPos.position;
     }
 
     

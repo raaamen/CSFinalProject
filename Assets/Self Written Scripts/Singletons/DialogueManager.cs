@@ -12,11 +12,9 @@ public class DialogueManager : Singleton<DialogueManager>
 {
 
     //references for gamemanager
+    [Header("Display Objects")]
     public DisplayObject DialogueMenu;
     public DisplayObject OnScreenText;
-    
-
-
 
     public UnityAction dialogueEnd;
 
@@ -151,8 +149,6 @@ public class DialogueManager : Singleton<DialogueManager>
         return null;
     }
 
-    
-
     public bool DialogueOccuring(){
         return dialogueOccuring;
     }
@@ -178,8 +174,5 @@ public class DialogueManager : Singleton<DialogueManager>
         }
     }
 
-    public void InitDialogue(Conversation convo){
-        //todo
-    }
 }
 

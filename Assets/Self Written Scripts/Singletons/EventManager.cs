@@ -18,6 +18,8 @@ public class EventManager : Singleton<EventManager>
     //public float lookTime;
     //bool seekingMysteryMan;
     public List<AudioClip> scaryAudioClips;
+
+    public GameObject ovrCamera;
     
     //create methods that will allow new events and create new entries into dictionary
     public Dictionary<string, UnityEvent> eventsDictionary;
@@ -112,21 +114,8 @@ public class EventManager : Singleton<EventManager>
         EventManager.Instance.audioSrc.PlayOneShot(clip, volume);
     }
 
-    
-
-    void StoryBeat1(){
-        //phone rings - convo1
-        DialogueManager.Instance.InitDialogue(DialogueManager.Instance.storyBeat1Dialogue[0]);
-        //play scary noises in background
-        
-        //spawntimer
+    public void ChangeCameraPosition(Transform newPos){
+        ovrCamera.transform.position = newPos.position;
     }
-
-    void StoryBeat2(){
-
-    }
-    
-
-    
 
 }
