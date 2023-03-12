@@ -54,12 +54,13 @@ public class GameManager : Singleton<GameManager>
         //ovrCamera = GameObject.Find("OVRCameraRig");
         Debug.Log("game set");
         EventManager.Instance.DialogueStart(0);
-        EventManager.TriggerEvent("First Phone Call");
         gameLoading=false;
 
     }
 
-
+    void ChangeCameraPosition(){
+        
+    }
 
     
 

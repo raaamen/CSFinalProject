@@ -6,27 +6,46 @@ using UnityEngine.Events;
 public class EventManageTrigger : MonoBehaviour
 {
     public UnityAction firstPhoneCall;
+    public UnityAction secondPhoneCall;
+
+    public UnityAction officeDoorClicked;
+
 
     [Header("Audio Clips")]
     public AudioClip phoneCall;
 
-    private void Awake() {
-        EventManager.StartListening("First Phone Call",firstPhoneCall);
-
-
-        InitializeEvents();
+    private void OnEnable() {
+        EventManager.StartListening("First Phone Call", firstPhoneCall);
+        EventManager.StartListening("Second Phone Call", secondPhoneCall);
+        EventManager.StartListening("Office Door Clicked", officeDoorClicked);
     }
 
-    void InitializeEvents(){
-        firstPhoneCall+=FirstPhoneCall;
+    private void Awake() {
+        firstPhoneCall = new UnityAction(FirstPhoneCall);
+        secondPhoneCall = new UnityAction(SecondPhoneCall);
+        officeDoorClicked = new UnityAction(OfficeDoorClicked);
     }
 
     public void FirstPhoneCall(){
-        Debug.Log("playing first phone call");
-        EventManager.Instance.PlayScarySound(phoneCall, 1);
-        
+        StartCoroutine("First_Phone_Call");
     }
-
+    IEnumerator First_Phone_Call(){
+        yield return new WaitForSeconds(10);
+        EventManager.PlayScarySound(phoneCall, 1);
+        yield return new WaitUntil(() => EventManager.Instance.audioSrc.isPlaying==false);
+        //todo
+        EventManager.Instance.DialogueStart(1);
+    }
+    public void SecondPhoneCall(){
+        //todo
+    }
+    IEnumerator Second_Phone_Call(){
+        //todo
+        yield return null;
+    }
+    void OfficeDoorClicked(){
+        //camera stuff
+    }
     
 
 }

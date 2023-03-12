@@ -79,6 +79,7 @@ public class EventManager : Singleton<EventManager>
         UnityEvent thisEvent = null;
         if (Instance.eventsDictionary.TryGetValue(eventName, out thisEvent))
         {
+            
             thisEvent.Invoke();
             Debug.Log("Event triggered:" +thisEvent);
         }
@@ -103,11 +104,12 @@ public class EventManager : Singleton<EventManager>
         yield return new WaitForSeconds(time);
         Instantiate(prefab, pos, Quaternion.identity);
     }
-    public void PlayScarySound(int index, float volume){
+    public  void PlayScarySound(int index, float volume){
         audioSrc.PlayOneShot(scaryAudioClips[index], volume);
     }
-    public void PlayScarySound(AudioClip clip, float volume){
-        audioSrc.PlayOneShot(clip, volume);
+    public static void PlayScarySound(AudioClip clip, float volume){
+        Debug.Log("Playing sound: "+ clip.name);
+        EventManager.Instance.audioSrc.PlayOneShot(clip, volume);
     }
 
     

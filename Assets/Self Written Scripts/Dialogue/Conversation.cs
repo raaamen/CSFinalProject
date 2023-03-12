@@ -13,4 +13,6 @@ public class Conversation : ScriptableObject
     //the text file is where the raw dialogue goes in. interpreted in dialoguemanager
     public TextAsset textFile;
 
+    public string eventTriggeredOnEnd;
+
 }

@@ -12,8 +12,8 @@ public class DialogueManager : Singleton<DialogueManager>
 {
 
     //references for gamemanager
-    public DisplayObject DialogueMenu = GameObject.Find("DialoguePanel").GetComponent<DisplayObject>();
-    public DisplayObject OnScreenText = GameObject.Find("ScreenText").GetComponent<DisplayObject>();
+    public DisplayObject DialogueMenu;
+    public DisplayObject OnScreenText;
     
 
 
@@ -33,11 +33,13 @@ public class DialogueManager : Singleton<DialogueManager>
     public AudioClip textSFX;
     public AudioSource audioSource;
     public string currentDialogueName;
+
+    public Conversation currentConvo;
     //for each character's "voice"
     //public Dictionary<string, AudioClip> charVoices;
     //public List<KeyValuePair> charVoicesList;
     void Awake() {
-    sentences = new Queue<string>();
+        sentences = new Queue<string>();
     //this is not functioning at the moment
     //charVoices = new Dictionary<string, AudioClip>();
      // foreach (KeyValuePair kvp in charVoicesList) {
@@ -49,13 +51,10 @@ public class DialogueManager : Singleton<DialogueManager>
     }
     //take in textasset from scriptableobject and turn it into queue
     public void StartDialogue(Conversation convoObj){
-        //fill queue
-        //go to first sentence
-        //clearing again just to make sure
         Debug.Log("starting dialogue: "+convoObj.conversationName);
         currentDialogueName = convoObj.conversationName;
-        sentences.Clear();
         ReadTextFile(convoObj.textFile);
+        currentConvo = convoObj;
         textUIElements.SetActive(true);
         WriteDialogue();
     }
@@ -93,25 +92,26 @@ public class DialogueManager : Singleton<DialogueManager>
         Debug.Log("dialogue ended");
         textUIElements.SetActive(false);
         //trigger event if there is one to be triggered
-
-
+        if (string.IsNullOrWhiteSpace(currentConvo.eventTriggeredOnEnd))
+        {
+            return;
+        }
+        Debug.Log("invoking event: "+currentConvo.eventTriggeredOnEnd);
+        EventManager.TriggerEvent(currentConvo.eventTriggeredOnEnd);
     }
     public void ReadTextFile(TextAsset asset){
         //read in from conversation
-        Debug.Log("reading text file: "+asset.name);
+        sentences.Clear();
         string content = asset.ToString();
         List<string> lines = content.Split('\n').ToList<string>();
         foreach (var item in lines)
         {
             sentences.Enqueue(item);
         }
-        PrintQueue(sentences);
-        Debug.Log(sentences.ToString());
     }
 
     public IEnumerator PrintOneByOne(string currentSentence){
         dialogueOccuring=true;
-        Debug.Log("printing");
         Debug.Log("current sentence: "+currentSentence);
         string tempsentence = "";
         for (int i = 0; i < currentSentence.Length; i++)
@@ -158,10 +158,16 @@ public class DialogueManager : Singleton<DialogueManager>
     }
 
     //some stuff for debugging
-    void PrintDictionary(Dictionary<string, AudioClip> dict){
+    public void PrintDictionary(Dictionary<string, AudioClip> dict){
         foreach (var item in dict)
         {
             Debug.Log("Key: "+item.Key+"\nValue: "+item.Value);
+        }
+    }
+    public void PrintDictionary(Dictionary<string, UnityEvent> dict){
+        foreach (var item in dict)
+        {
+            Debug.Log("Key: "+item.Key+"\nValue: "+item.Value.ToString());
         }
     }
     void PrintQueue(Queue<string> queue){

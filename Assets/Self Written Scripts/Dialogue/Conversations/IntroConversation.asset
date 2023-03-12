@@ -16,3 +16,4 @@ MonoBehaviour:
   participants: 
   description: The intro conversation
   textFile: {fileID: 4900000, guid: 5b8dee30d8243b6468edb30112593e29, type: 3}
+  eventTriggeredOnEnd: First Phone Call
