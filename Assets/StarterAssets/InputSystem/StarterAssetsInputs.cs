@@ -39,7 +39,7 @@ namespace StarterAssets
 
 		public void OnCameraLook(InputValue value){
 			CameraLookInput(value.Get<Vector2>());
-			Debug.Log("camera value:"+value.Get<Vector2>());
+			//Debug.Log("camera value:"+value.Get<Vector2>());
 		}
 
 		public void OnJump(InputValue value)

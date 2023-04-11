@@ -87,6 +87,7 @@ namespace StarterAssets
 		// cinemachine
 		private float _cinemachineTargetPitch;
 		public CinemachineVirtualCamera cinemachineVirtualCamera;
+		public Camera cinemachineCameraReplacement;
 
 		// player
 		private float _speed;
@@ -131,6 +132,7 @@ namespace StarterAssets
 			{
 				cinemachineVirtualCamera = CinemachineCameraTarget.GetComponent<CinemachineVirtualCamera>();
 			}
+			Debug.Log(cinemachineCameraReplacement.name);
 		}
 
 		private void Start()
@@ -259,7 +261,7 @@ namespace StarterAssets
 			float movespeed = MoveSpeed;
 			if (_input.cameramove == Vector2.zero) movespeed = 0.0f;
 			//FIX!!!!!!!!!!!!!!
-			Quaternion currentCameraSpeed = CinemachineCameraTarget.transform.localRotation;
+			Quaternion currentCameraSpeed = cinemachineCameraReplacement.transform.localRotation;
 
 			Vector3 newVect = new Vector3(-_input.cameramove.y, _input.cameramove.x, 0);
 
@@ -273,10 +275,10 @@ namespace StarterAssets
 			if (_input.zoom == 0) zoomspeed=0;
 			//gets current zoom length from virtual camera's field of view
 			//FIX!!!!!!!!
-			float currentZoomLength = cinemachineVirtualCamera.m_Lens.FieldOfView;
+			float currentZoomLength = cinemachineCameraReplacement.fieldOfView;
 
 			float targetZoomLength = currentZoomLength + (zoomspeed * _input.zoom * Time.deltaTime);
-			cinemachineVirtualCamera.m_Lens.FieldOfView=targetZoomLength;
+			cinemachineCameraReplacement.fieldOfView=targetZoomLength;
 			
 
 		}

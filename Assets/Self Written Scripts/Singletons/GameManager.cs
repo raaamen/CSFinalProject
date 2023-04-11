@@ -55,9 +55,9 @@ public class GameManager : Singleton<GameManager>
 
     public void SetupBeginningOfGame(){
         gameLoading=true;
-        xrManager.MainGameInitVR();
         Debug.Log("Loading done");
         Debug.Log("Game started");
+        xrManager.MainGameInitVR();
         EventManager.Instance.gameStarted = true;
         DialogueMenu = DialogueManager.Instance.DialogueMenu;
         OnScreenText = DialogueManager.Instance.OnScreenText;

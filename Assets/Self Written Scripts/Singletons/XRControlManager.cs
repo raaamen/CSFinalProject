@@ -57,8 +57,6 @@ public class XRControlManager : Singleton<XRControlManager>
         FPSCAMERA = GameObject.Find("MainCamera");
         if (XRSettings.isDeviceActive)
         {
-           
-
             OVRCAMERA.SetActive(true);
             FPSCAMERA.SetActive(false);
 
@@ -74,9 +72,6 @@ public class XRControlManager : Singleton<XRControlManager>
             GameManager.Instance.gameIsInVR = true;
         }
         else {
-
-
-
             OVRCAMERA.SetActive(false);
             FPSCAMERA.SetActive(true);
 
