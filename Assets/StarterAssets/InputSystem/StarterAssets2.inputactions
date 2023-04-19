@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "MoveCameraPos",
+                    "type": "Button",
+                    "id": "80d34299-8425-4541-ad44-044889884e0f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -207,7 +216,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
+                    "name": "Keyboard",
                     "id": "e1fd1e84-a4b0-4576-ad07-52d322b4a0f5",
                     "path": "1DAxis",
                     "interactions": "",
@@ -232,6 +241,39 @@
                     "name": "positive",
                     "id": "f6d84e2b-bc56-4ee1-9848-87525d354d40",
                     "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "vr",
+                    "id": "625591f9-f949-4ec7-a18e-c561f21b6f85",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "2912dba2-7463-483c-823a-52d1824e7f19",
+                    "path": "<Joystick>/stick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "fbc31a60-b255-42a2-af1f-0cd98650f90b",
+                    "path": "<Joystick>/stick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -293,6 +335,17 @@
                     "action": "CameraLook",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "9bb53ae4-5c0c-4b0b-aef8-05bc98ea523f",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "MoveCameraPos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

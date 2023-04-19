@@ -65,14 +65,14 @@ namespace StarterAssets
 
 		public GameObject parentObj;
 
-		public int cameraListInt{
+		public int CameraListInt{
 			get {
 				return _cameraListInt;
 			}
 			set {
 				Debug.Log("cam list count "+cameraList.Count);
-				_cameraListInt+=value;
-				if (_cameraListInt > cameraList.Count)
+				_cameraListInt=value;
+				if (_cameraListInt == cameraList.Count)
 				{
 					Debug.Log("Reverting to 0");
 
@@ -176,15 +176,16 @@ namespace StarterAssets
 		private void CameraPosSwitch(bool pressed){
 			
 			//Debug.Log(cameraPosChanged);
-			if (cameraPosChanged)
+			if (_input.camswitch)
 			{
-				Debug.Log("Camera List Int "+cameraListInt);
-				parentObj.transform.position = cameraList[cameraListInt].position;
-				cameraListInt++;
-				Debug.Log("Camera List Int "+cameraListInt);
+				Debug.Log("Camera List Int "+CameraListInt);
+				parentObj.transform.position = cameraList[CameraListInt].position;
+				CameraListInt++;
+				Debug.Log("Camera List Int "+CameraListInt);
 				Debug.Log("Parent location "+parentObj.transform.position);
-				Debug.Log(cameraList[cameraListInt].name+ " " + cameraList[cameraListInt++].position);
+				Debug.Log(cameraList[CameraListInt].name+ " " + cameraList[CameraListInt++].position);
 				cameraPosChanged=false;
+				_input.camswitch=false;
 			}
 		}
 

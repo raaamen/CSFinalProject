@@ -53,6 +53,7 @@ namespace StarterAssets
 		}
 
 		public void OnZoom(InputValue value){
+			Debug.Log("Zoom value "+value);
 			ZoomInput(value.Get<float>());
 		}
 
