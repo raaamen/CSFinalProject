@@ -123,6 +123,7 @@ public class EventManager : Singleton<EventManager>
     }
 
     public void ChangeCameraPosition(Transform newPos){
+        Debug.Log("changing camera pos to "+newPos.name);
         gameCamera.transform.position = newPos.position;
     }
 
