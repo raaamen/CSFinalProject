@@ -89,6 +89,7 @@ namespace StarterAssets
 		public CinemachineVirtualCamera cinemachineVirtualCamera;
 		public Camera cinemachineCameraReplacement;
 
+		public Camera mainVideoCamera1stPersonObj;
 		// player
 		private float _speed;
 		private float _rotationVelocity;
@@ -261,11 +262,11 @@ namespace StarterAssets
 			float movespeed = MoveSpeed;
 			if (_input.cameramove == Vector2.zero) movespeed = 0.0f;
 			//FIX!!!!!!!!!!!!!!
-			Quaternion currentCameraSpeed = cinemachineCameraReplacement.transform.localRotation;
+			Quaternion currentCameraSpeed = mainVideoCamera1stPersonObj.transform.localRotation;
 
 			Vector3 newVect = new Vector3(-_input.cameramove.y, _input.cameramove.x, 0);
 
-			transform.localEulerAngles += newVect * movespeed * Time.deltaTime;
+			mainVideoCamera1stPersonObj.transform.localEulerAngles += newVect * movespeed * Time.deltaTime;
 
 		}
 

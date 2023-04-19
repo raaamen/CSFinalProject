@@ -33,22 +33,22 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MoveCamera",
-                    "type": "Button",
+                    "name": "CameraLook",
+                    "type": "Value",
                     "id": "5f55e96e-2419-4d18-8899-b1e0232a72c0",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
-                    "name": "ZoomCamera",
-                    "type": "Button",
+                    "name": "Zoom",
+                    "type": "Value",
                     "id": "7609a612-bbff-4b00-89d0-eef5df7c9c51",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -207,26 +207,92 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "9b5431e5-0982-4f90-918f-1328c38897eb",
-                    "path": "",
+                    "name": "1D Axis",
+                    "id": "e1fd1e84-a4b0-4576-ad07-52d322b4a0f5",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveCamera",
-                    "isComposite": false,
+                    "action": "Zoom",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "aab78c0c-e76d-4996-8955-4f08f40fa099",
-                    "path": "",
+                    "name": "negative",
+                    "id": "0efa6430-d38f-4ba1-8292-5019a30fc8d3",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ZoomCamera",
+                    "action": "Zoom",
                     "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "f6d84e2b-bc56-4ee1-9848-87525d354d40",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "ae896f60-fdb6-4e79-8f3c-9bfee5af33a6",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLook",
+                    "isComposite": true,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "251d8d98-8221-4349-b7fb-328c78b349b7",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLook",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "66d572ed-9890-4664-bbe2-80a2fe550beb",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLook",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "1850de6c-f184-412b-9002-f05055de2618",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLook",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "c068ea58-1033-4f39-80c8-559b53809ef7",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLook",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
