@@ -43,10 +43,10 @@ public class EventManager : Singleton<EventManager>
         switch (GameManager.Instance.gameIsInVR)
         {
             case true:
-                gameCamera = GameObject.Find("");
+                gameCamera = GameObject.Find("OVRPlayerController");
                 break;
             case false:
-                gameCamera = GameObject.Find("");
+                gameCamera = GameObject.Find("FPSCamera");
                 break;
         }
     }
@@ -123,8 +123,11 @@ public class EventManager : Singleton<EventManager>
     }
 
     public void ChangeCameraPosition(Transform newPos){
+        gameCamera.GetComponentInChildren<CharacterController>().enabled=false;
         Debug.Log("changing camera pos to "+newPos.name);
-        gameCamera.transform.position = newPos.position;
+        Debug.Log(gameCamera.transform.position+" moving to "+newPos.position);
+        gameCamera.transform.localPosition = newPos.position;
+        gameCamera.GetComponentInChildren<CharacterController>().enabled=true;
     }
 
 }

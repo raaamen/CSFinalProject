@@ -19,6 +19,8 @@ public class GameManager : Singleton<GameManager>
 
     public XRControlManager xrManager;
 
+    public Camera mainCamera;
+
     public bool gameIsInVR;
 
     [Header("Camera Warp Positions")]
@@ -50,9 +52,6 @@ public class GameManager : Singleton<GameManager>
         }
         
     }
-
-    
-
     public void SetupBeginningOfGame(){
         gameLoading=true;
         Debug.Log("Loading done");
@@ -63,16 +62,11 @@ public class GameManager : Singleton<GameManager>
         OnScreenText = DialogueManager.Instance.OnScreenText;
         Debug.Log("Setting up beginning of game");
         ovrCamera = GameObject.Find("OVRPlayerController");
-        firstPersonCamera = GameObject.Find("FirstPersonPlayerController");
+        firstPersonCamera = GameObject.Find("FPSCamera");
         Debug.Log("game set");
+        Cursor.lockState = CursorLockMode.Locked;
         EventManager.Instance.DialogueStart(0);
         gameLoading=false;
-
     }
-
-    
-
-    
-
     
 }

@@ -166,6 +166,10 @@ namespace StarterAssets
 			CameraLook();
 		}
 
+		public void ChangeMoveSpeed(float speed){
+			MoveSpeed = speed;
+		}
+
 		private void GroundedCheck()
 		{
 			// set sphere position, with offset
@@ -179,8 +183,9 @@ namespace StarterAssets
 			if (_input.camswitch)
 			{
 				Debug.Log("Camera List Int "+CameraListInt);
-				parentObj.transform.position = cameraList[CameraListInt].position;
 				CameraListInt++;
+				parentObj.transform.position = cameraList[CameraListInt].position;
+				parentObj.transform.rotation = cameraList[CameraListInt].rotation;
 				Debug.Log("Camera List Int "+CameraListInt);
 				Debug.Log("Parent location "+parentObj.transform.position);
 				Debug.Log(cameraList[CameraListInt].name+ " " + cameraList[CameraListInt++].position);
